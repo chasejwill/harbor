@@ -1,0 +1,45 @@
+/**
+ * Installers are built on the target operating system.
+ * A Linux machine cannot produce a signed macOS app.
+ * @see https://www.electron.build/configuration
+ */
+{
+  appId: "app.harbor.desktop",
+  productName: "Harbor",
+  asar: true,
+  icon: "build/icon.png",
+  directories: {
+    output: "release",
+    buildResources: "build",
+  },
+  files: ["dist/**/*", "dist-electron/**/*"],
+  extraResources: [
+    { from: "bin", to: "bin", filter: ["**/*", "!.gitkeep"] },
+    { from: "build/icon.png", to: "icon.png" },
+  ],
+  mac: {
+    category: "public.app-category.utilities",
+    target: ["dmg"],
+    artifactName: "Harbor-${version}-mac-${arch}.${ext}",
+  },
+  win: {
+    target: [
+      {
+        target: "nsis",
+        arch: ["x64"],
+      },
+    ],
+    artifactName: "Harbor-${version}-win-${arch}.${ext}",
+  },
+  nsis: {
+    oneClick: false,
+    perMachine: false,
+    allowToChangeInstallationDirectory: true,
+    deleteAppDataOnUninstall: false,
+  },
+  linux: {
+    target: ["AppImage"],
+    category: "Utility",
+    artifactName: "Harbor-${version}-linux-${arch}.${ext}",
+  },
+}

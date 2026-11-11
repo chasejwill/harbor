@@ -1,0 +1,42 @@
+{
+  "name": "harbor",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Personal desktop app to save a YouTube video or its audio.",
+  "author": "Chasejwill",
+  "license": "MIT",
+  "productName": "Harbor",
+  "main": "dist-electron/main.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "fetch-engines": "node scripts/fetch-engines.mjs",
+    "postinstall": "node scripts/fetch-engines.mjs --soft",
+    "dist": "npm run build && electron-builder",
+    "dist:mac": "npm run build && electron-builder --mac",
+    "dist:win": "npm run build && electron-builder --win",
+    "dist:linux": "npm run build && electron-builder --linux",
+    "predist": "node scripts/fetch-engines.mjs --with-ffmpeg",
+    "predist:mac": "node scripts/fetch-engines.mjs --with-ffmpeg",
+    "predist:win": "node scripts/fetch-engines.mjs --with-ffmpeg",
+    "predist:linux": "node scripts/fetch-engines.mjs --with-ffmpeg"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "electron": "^45.3.0",
+    "electron-builder": "^26.18.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8",
+    "vite-plugin-electron": "^1.2.0",
+    "vitest": "^5.1.0"
+  },
+  "dependencies": {
+    "@fontsource/fraunces": "^5.3.0",
+    "@fontsource/outfit": "^5.3.0"
+  }
+}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Harbor</title>
+    <link rel="icon" href="/icon.png" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="top">
+        <div class="brand">
+          <span class="mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18">
+              <path d="M12 3.5v9.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+              <path d="M7.8 10.2 12 14.6l4.2-4.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M5 18.5h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+            </svg>
+          </span>
+          <div>
+            <h1>Harbor</h1>
+            <p class="lede">Save one YouTube video, or just the sound, to a folder on this computer.</p>
+          </div>
+        </div>
+      </header>
+
+      <div id="engine-banner" class="banner" hidden></div>
+
+      <form id="save-form" novalidate>
+        <div>
+          <label class="field-label" for="url">YouTube link</label>
+          <input
+            id="url"
+            name="url"
+            type="url"
+            inputmode="url"
+            placeholder="https://www.youtube.com/watch?v=…"
+            autocomplete="off"
+            autocapitalize="off"
+            spellcheck="false"
+            aria-describedby="url-hint"
+          />
+          <p id="url-hint" class="hint">One video. Playlists aren’t saved.</p>
+        </div>
+
+        <fieldset>
+          <legend>What to save</legend>
+          <div class="choices">
+            <label class="choice">
+              <input type="radio" name="mode" value="video" checked />
+              <span>
+                <strong>Video and audio</strong>
+                <small>Highest quality, merged into an MP4.</small>
+              </span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="mode" value="audio" />
+              <span>
+                <strong>Audio only</strong>
+                <small>Best source audio, then MP3 or WAV.</small>
+              </span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset id="audio-format" class="audio-format" hidden>
+          <legend>Audio file</legend>
+          <div class="segment" role="radiogroup" aria-label="Audio file">
+            <label>
+              <input type="radio" name="audioFormat" value="mp3" checked />
+              MP3
+            </label>
+            <label>
+              <input type="radio" name="audioFormat" value="wav" />
+              WAV
+            </label>
+          </div>
+          <p id="format-hint" class="hint">MP3 is smaller and plays almost everywhere. WAV is uncompressed and larger.</p>
+        </fieldset>
+
+        <div>
+          <label class="field-label" for="folder">Save to</label>
+          <div class="folder-row">
+            <input id="folder" type="text" readonly value="Finding your Downloads folder…" />
+            <button type="button" id="choose" class="secondary">Choose folder</button>
+          </div>
+        </div>
+
+        <p id="plan" class="plan">This saves the highest-quality video and audio as an MP4.</p>
+        <button type="submit" id="start" class="primary">Start</button>
+      </form>
+
+      <section id="status" class="status panel empty" aria-live="polite" aria-atomic="true">
+        <h2>Nothing saved yet</h2>
+        <p>Paste a link, choose video or audio, and press Start.</p>
+      </section>
+
+      <footer>
+        <p>For your own use. YouTube’s terms restrict downloading.</p>
+      </footer>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
